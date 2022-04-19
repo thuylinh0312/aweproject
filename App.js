@@ -4,7 +4,7 @@ const YourApp = () => {
   return(
     <View>
       <Text>
-        Hello World
+        Hello World (Viet edited)
       </Text>
     </View>
   )
