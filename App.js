@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,7 +15,9 @@ import {
   Text,
   useColorScheme,
   View,
+  Image,
 } from 'react-native';
+import {MyCustomComponent} from './MyCustomComponent'
 
 import {
   Colors,
@@ -26,8 +27,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
+const Section = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  
+
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -46,6 +50,15 @@ const Section = ({children, title}): Node => {
             color: isDarkMode ? Colors.light : Colors.dark,
           },
         ]}>
+          {/* <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text> */}
         {children}
       </Text>
     </View>
@@ -54,46 +67,27 @@ const Section = ({children, title}): Node => {
 
 // add => commit => push
 
-const App: () => Node = () => {
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const a = 1123123123213
 
-  const backgroundStyle = {
-
-    backgroundColor: 'blue',
-  };
+  // MyCustomComponent()
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        
-        <View
-          style={{
-
-          }}>
-          <Section title="Step One">
-            Edit123456789 <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View>
+      <Text>Phan Trung Viet</Text>
+      <Image style={styles.image} source={{uri: 'https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80'}} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundStyle: {
+    paddingLeft: 10
+  },
+  image: {
+    width: 400, height: 400
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
