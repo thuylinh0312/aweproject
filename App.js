@@ -52,6 +52,8 @@ const Section = ({children, title}): Node => {
   );
 };
 
+// add => commit => push
+
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -72,7 +74,7 @@ const App: () => Node = () => {
 
           }}>
           <Section title="Step One">
-            Edit123 <Text style={styles.highlight}>App.js</Text> to change this
+            Edit123456 <Text style={styles.highlight}>App.js</Text> to change this
             screen and then come back to see your edits.
           </Section>
           <Section title="See Your Changes">
