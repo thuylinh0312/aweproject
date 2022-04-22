@@ -3,9 +3,9 @@ import {Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from "react
 import {Example1} from './src/Example1'
 
 const data = [
-  {username: 'phantrungviet1', password: '123454546'},
-  {username: 'phantrungviet2', password: '123454546'},
-  {username: 'phantrungviet3', password: '123454546'}
+  {username: 'phantrungviet1', password: '1234561'},
+  {username: 'phantrungviet2', password: '1234562'},
+  {username: 'phantrungviet3', password: '1234563'}
 ]
 
 const YourApp = () => {
@@ -15,9 +15,10 @@ const YourApp = () => {
 
   return(
     <View style={styles.container}>
-      <Text style = {styles.title}>
-        Sign In
-      </Text>
+      <View style = {styles.title}>       
+        <Text>SIGN IN</Text>
+        <Text>SIGN UP</Text>
+      </View>
       <Image
         style={styles.logo}
         source={{
@@ -33,11 +34,14 @@ const YourApp = () => {
         <TextInput
           style={styles.text}
           onChangeText={onChangePassword}
-          placeholder="Password"
+          placeholder="password"
         />
         <TouchableOpacity>
           <Text style ={[styles.text, styles.textlogin]}>
-            Login
+            LOGIN
+          </Text>
+          <Text style ={styles.textforgotpass}>
+            Forgot Password?
           </Text>
         </TouchableOpacity>
       </View>
@@ -50,37 +54,40 @@ export default YourApp
 const styles = StyleSheet.create ({
   container: {
     flex: 1,
-    backgroundColor: "pink",
-    // justifyContent: 'space-between',
+    backgroundColor: "white",
   },
   title: {
-    fontSize: 45,
+    flexDirection: "row",
+    fontSize: 20,
     fontWeight: "bold",
-    color: "black",
-    backgroundColor: 'red',
+    justifyContent:"space-evenly",
+    marginTop: 35
   },
   logo: {
-    width: 64,
-    height: 64,
-    backgroundColor: 'blue',
+    width: 150,
+    height: 150,
     alignSelf: 'center',
+    marginTop: 40,
     marginVertical: 12
   },
   input: {
-    backgroundColor: 'yellow',
-    padding: 12
+    marginTop:20,
   },
   text: {
-    backgroundColor: "white",
+    backgroundColor: "lightgray",
     borderRadius: 10,
-    borderWidth: 1,
-    marginBottom: 5,
-    borderColor: 'red'
+    marginBottom: 10,
+    marginHorizontal: 35
+
   },
   textlogin: {
     alignSelf: 'center',
     padding: 8,
-    backgroundColor: 'blue',
+    backgroundColor: 'lightblue',
     color: 'white',
+  },
+  textforgotpass: {
+    marginTop: 80,
+    alignSelf: 'center',
   }
 })
