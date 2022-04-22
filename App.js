@@ -1,18 +1,26 @@
 import React from "react";
-import {Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import {Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
 const YourApp = () => {
   const [text1, onChangeText1] = React.useState(null);
   const [text2, onChangeText2] = React.useState(null);
+  
+
   return(
-    <View style = {styles.container}>
+    <View style={styles.container}>
       <Text style = {styles.title}>
         Sign In
       </Text>
+      <Image
+        style={styles.logo}
+        source={{
+          uri: 'https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560?k=20&m=1140180560&s=612x612&w=0&h=X_400OQDFQGqccORnKt2PHYvTZ3dBLeEnCH_hRiUQrY=',
+        }}
+      />
       <View style = {styles.input}>
         <TextInput
           style={styles.text}
           onChangeText={onChangeText1}
-        placeholder="Username"
+          placeholder="Username"
         />
         <TextInput
           style={styles.text}
@@ -43,8 +51,14 @@ const styles = StyleSheet.create ({
     color: "black",
     textAlign: 'center'
   },
+  logo: {
+    width: 64,
+    height: 64,
+    backgroundColor: 'red'
+  },
   input: {
-    marginTop: 250,
+    padding: 12,
+    backgroundColor: 'yellow'
   },
   text: {
     backgroundColor: "white",
@@ -52,10 +66,10 @@ const styles = StyleSheet.create ({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    marginBottom: 5,
   },
   textlogin: {
     textAlign: 'center',
-    marginHorizontal: 130,
   }
 })
