@@ -1,9 +1,17 @@
 import React from "react";
 import {Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
+import {Example1} from './src/Example1'
+
+const data = [
+  {username: 'phantrungviet1', password: '123454546'},
+  {username: 'phantrungviet2', password: '123454546'},
+  {username: 'phantrungviet3', password: '123454546'}
+]
+
 const YourApp = () => {
-  const [text1, onChangeText1] = React.useState(null);
-  const [text2, onChangeText2] = React.useState(null);
-  
+  const [username, onChangeUsername] = React.useState('');
+  const [password, onChangePassword] = React.useState('');
+  // return <Example1 />
 
   return(
     <View style={styles.container}>
@@ -19,12 +27,12 @@ const YourApp = () => {
       <View style = {styles.input}>
         <TextInput
           style={styles.text}
-          onChangeText={onChangeText1}
-          placeholder="Username"
+          onChangeText={text => onChangeUsername(text)}
+          placeholder="username"
         />
         <TextInput
           style={styles.text}
-          onChangeText={onChangeText2}
+          onChangeText={onChangePassword}
           placeholder="Password"
         />
         <TouchableOpacity>
@@ -33,7 +41,7 @@ const YourApp = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      
+      {/* <Text>Dang nhap thanh cong / Sai mat khau</Text> */}
     </View>
   )
 }
@@ -43,33 +51,36 @@ const styles = StyleSheet.create ({
   container: {
     flex: 1,
     backgroundColor: "pink",
+    // justifyContent: 'space-between',
   },
   title: {
-    marginTop: 20,
     fontSize: 45,
     fontWeight: "bold",
     color: "black",
-    textAlign: 'center'
+    backgroundColor: 'red',
   },
   logo: {
     width: 64,
     height: 64,
-    backgroundColor: 'red'
+    backgroundColor: 'blue',
+    alignSelf: 'center',
+    marginVertical: 12
   },
   input: {
-    padding: 12,
-    backgroundColor: 'yellow'
+    backgroundColor: 'yellow',
+    padding: 12
   },
   text: {
     backgroundColor: "white",
-    marginHorizontal: 50,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
     borderRadius: 10,
     borderWidth: 1,
     marginBottom: 5,
+    borderColor: 'red'
   },
   textlogin: {
-    textAlign: 'center',
+    alignSelf: 'center',
+    padding: 8,
+    backgroundColor: 'blue',
+    color: 'white',
   }
 })
