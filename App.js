@@ -11,6 +11,7 @@ const data = [
 const YourApp = () => {
   const [username, onChangeUsername] = React.useState('');
   const [password, onChangePassword] = React.useState('');
+  const [isSuccess, setSuccess] = React.useState();
   // return <Example1 />
 
   return(
@@ -27,21 +28,29 @@ const YourApp = () => {
       <View style = {styles.input}>
         <TextInput
           style={styles.text}
-          onChangeText={text => onChangeUsername(text)}
+          onChangeText={onChangeUsername}
           placeholder="username"
         />
         <TextInput
           style={styles.text}
           onChangeText={onChangePassword}
           placeholder="Password"
+          textContentType="password"
+          secureTextEntry={true}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          const isContains = data.some(
+            (element) => element.username === username && element.password === password
+            ) // true / false
+
+          setSuccess(isContains)
+        }}>
           <Text style ={[styles.text, styles.textlogin]}>
             Login
           </Text>
         </TouchableOpacity>
       </View>
-      {/* <Text>Dang nhap thanh cong / Sai mat khau</Text> */}
+      {isSuccess !== undefined && <Text>{isSuccess ? 'Dang nhap thanh cong' : 'Sai mat khau'}</Text>}
     </View>
   )
 }
