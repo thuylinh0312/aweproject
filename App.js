@@ -1,102 +1,24 @@
 import React from "react";
 import {Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
 import {Example1} from './src/Example1'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {SignInScreen} from './src/screens/SignInScreen'
+import {SignUpScreen} from './src/screens/SignUpScreen'
 
-const data = [
-  {username: 'phantrungviet1', password: '1234561'},
-  {username: 'phantrungviet2', password: '1234562'},
-  {username: 'phantrungviet3', password: '1234563'}
-]
+const Stack = createNativeStackNavigator();
 
 const YourApp = () => {
-  const [username, onChangeUsername] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-  const [isSuccess, setSuccess] = React.useState();
   // return <Example1 />
-
-  return(
-    <View style={styles.container}>
-      <View style = {styles.title}>       
-        <Text>SIGN IN</Text>
-        <Text>SIGN UP</Text>
-      </View>
-      <Image
-        style={styles.logo}
-        source={{
-          uri: 'https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560?k=20&m=1140180560&s=612x612&w=0&h=X_400OQDFQGqccORnKt2PHYvTZ3dBLeEnCH_hRiUQrY=',
-        }}
-      />
-      <View style = {styles.input}>
-        <TextInput
-          style={styles.text}
-          onChangeText={onChangeUsername}
-          placeholder="username"
-        />
-        <TextInput
-          style={styles.text}
-          onChangeText={onChangePassword}
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry={true}
-        />
-        <TouchableOpacity onPress={() => {
-          const isContains = data.some(
-            (element) => element.username === username && element.password === password
-            ) // true / false
-
-          setSuccess(isContains)
-        }}>
-          <Text style ={[styles.text, styles.textlogin]}>
-            LOGIN
-          </Text>
-          <Text style ={styles.textforgotpass}>
-            Forgot Password?
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {isSuccess !== undefined && <Text>{isSuccess ? 'Dang nhap thanh cong' : 'Sai mat khau'}</Text>}
-    </View>
+  
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Sign In" component={SignInScreen} />
+        <Stack.Screen name="Sign Up" component={SignUpScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
 export default YourApp
-const styles = StyleSheet.create ({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-  title: {
-    flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    justifyContent:"space-evenly",
-    marginTop: 35
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    alignSelf: 'center',
-    marginTop: 40,
-    marginVertical: 12
-  },
-  input: {
-    marginTop:20,
-  },
-  text: {
-    backgroundColor: "lightgray",
-    borderRadius: 10,
-    marginBottom: 10,
-    marginHorizontal: 35
-
-  },
-  textlogin: {
-    alignSelf: 'center',
-    padding: 8,
-    backgroundColor: 'lightblue',
-    color: 'white',
-  },
-  textforgotpass: {
-    marginTop: 80,
-    alignSelf: 'center',
-  }
-})
