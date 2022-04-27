@@ -38,6 +38,8 @@ export const SignInScreen = ({navigation}) => {
             //     (element) => element.username === username && element.password === password) // true / false 
             //   }
             // }
+            
+            
             onPress={() => navigation.navigate('Home', {username: username})}
 
             >

@@ -5,23 +5,36 @@ export const HomeScreen = ({navigation, route}) => {
     const { username } = route.params;
 
     return (
-        <View>
-            <TextInput placeholder='username' style={styles.textInput} defaultValue={username} />
-
-            <TextInput placeholder='password' style={styles.textInput} />
-
-            <TextInput placeholder='confirm password' style={styles.textInput} />
-            
-            <TouchableOpacity style={{backgroundColor: 'pink'}} onPress={() => navigation.goBack()}>
-                <Text>Back</Text>
+        <View style ={styles.container}>
+            <View style = {styles.text}>
+                <Text>Hello!</Text>
+                <Text>{username}</Text>
+            </View>
+            <TouchableOpacity style ={styles.back} onPress={() => navigation.goBack()}>
+                <Text>BACK</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    textInput: {
-        borderWidth: 1,
-        margin: 5,
-    }
+    container: {
+        flex: 1,
+        backgroundColor: "white",
+    },
+    text: {
+        fontWeight: "bold",
+        marginVertical: 30,
+        alignItems: "center",
+        justifyContent: "center"
+    }, 
+    back: {
+        borderRadius: 10,
+        marginBottom: 10,
+        marginHorizontal: 35,
+        alignSelf: 'center',
+        padding: 8,
+        backgroundColor: 'lightblue',
+        color: 'white',
+      },
 })

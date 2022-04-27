@@ -1,21 +1,17 @@
 import React from 'react'
 import {Text, View, TouchableOpacity, TextInput, StyleSheet} from 'react-native'
 
-export const SignUpScreen = ({navigation, route}) => {
-    const { username } = route.params;
+export const SignUpScreen = ({navigation}) => {
 
     return (
         <View style ={styles.container}>
             <Text style ={styles.title}>SIGN UP</Text>
-            <TextInput placeholder='username' style={styles.textInput} defaultValue={username} />
+            <TextInput placeholder='username' style={styles.textInput}  />
 
             <TextInput placeholder='password' style={styles.textInput} />
 
             <TextInput placeholder='confirm password' style={styles.textInput} />
             
-            {/* <TouchableOpacity style={{backgroundColor: 'pink'}} onPress={() => navigation.goBack()}>
-                <Text>Back</Text>
-            </TouchableOpacity> */}
             <Text style ={styles.text}>
                 Sign up
             </Text>
