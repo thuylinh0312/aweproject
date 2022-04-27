@@ -5,23 +5,60 @@ export const SignUpScreen = ({navigation, route}) => {
     const { username } = route.params;
 
     return (
-        <View>
+        <View style ={styles.container}>
+            <Text style ={styles.title}>SIGN UP</Text>
             <TextInput placeholder='username' style={styles.textInput} defaultValue={username} />
 
             <TextInput placeholder='password' style={styles.textInput} />
 
             <TextInput placeholder='confirm password' style={styles.textInput} />
             
-            <TouchableOpacity style={{backgroundColor: 'pink'}} onPress={() => navigation.goBack()}>
+            {/* <TouchableOpacity style={{backgroundColor: 'pink'}} onPress={() => navigation.goBack()}>
                 <Text>Back</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Text style ={styles.text}>
+                Sign up
+            </Text>
+            <View style = {styles.under}>
+            <Text>Have an account?  </Text>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style = {{fontWeight: "bold"}}>Sign in</Text>
+            </TouchableOpacity>   
+          </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "white",
+    },
     textInput: {
         borderWidth: 1,
-        margin: 5,
-    }
+        margin: 10,
+        padding:10
+    },
+    title: {
+        fontSize: 30,
+      fontWeight: "bold",
+      marginTop: 30,
+      alignSelf:"center"
+      },
+    text: {
+        backgroundColor: "lightgray",
+        borderRadius: 10,
+        marginVertical: 20,
+        marginHorizontal: 35,
+        alignSelf: 'center',
+        padding: 8,
+        backgroundColor: 'lightblue',
+        color: 'white',
+      },
+    under: {
+        marginTop: 20,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems:"center"
+      },
 })
