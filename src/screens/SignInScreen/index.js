@@ -1,16 +1,16 @@
 import React from 'react'
 import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet} from 'react-native'
-
-const data = [
-    {username: 'phantrungviet1', password: '1234561'},
-    {username: 'phantrungviet2', password: '1234562'},
-    {username: 'phantrungviet3', password: '1234563'},
-  ]
+import { data } from '../SignUpScreen';
+// const data = [
+//     {username: 'phantrungviet1', password: '1234561'},
+//     {username: 'phantrungviet2', password: '1234562'},
+//     {username: 'phantrungviet3', password: '1234563'},
+//   ]
 
 export const SignInScreen = ({navigation}) => {
     const [username, onChangeUsername] = React.useState('');
     const [password, onChangePassword] = React.useState('');
-
+    console.log({data})
     return(
         <View style={styles.container}>    
           <Text style = {styles.title}>SIGN IN</Text>
@@ -30,17 +30,23 @@ export const SignInScreen = ({navigation}) => {
               style={styles.text}
               onChangeText={onChangePassword}
               placeholder="Password"
-              secureTextEntry={true}
+              //secureTextEntry={true}
             />
             <TouchableOpacity 
-            // onPress={() => {
-            //   const isContains = data.some(
-            //     (element) => element.username === username && element.password === password) // true / false 
-            //   }
-            // }
+            onPress={() => {
+              const isContains = data.some(
+                (element) => element.username === username && element.password === password)
+                if (isContains === true){
+                
+                    navigation.navigate('Home', {username: username})
+                  
+                }else alert("Loi dang nhap!!! Kiem tra thong tin tai khoan")
+                
+              }
+            }
             
             
-            onPress={() => navigation.navigate('Home', {username: username})}
+            //onPress={() => navigation.navigate('Home', {username: username})}
 
             >
               <Text style ={[styles.text, styles.textlogin]}>
