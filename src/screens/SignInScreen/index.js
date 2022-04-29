@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet} from 'react-native'
+import {View, Text, Image, TextInput,ScrollView, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native'
 import { data } from '../SignUpScreen';
 // const data = [
 //     {username: 'phantrungviet1', password: '1234561'},
@@ -12,7 +12,9 @@ export const SignInScreen = ({navigation}) => {
     const [password, onChangePassword] = React.useState('');
     console.log({data})
     return(
-        <View style={styles.container}>    
+      <KeyboardAvoidingView style={{flex: 1}}
+         behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ScrollView style={styles.container}>    
           <Text style = {styles.title}>SIGN IN</Text>
           <Image
             style={styles.logo}
@@ -60,7 +62,8 @@ export const SignInScreen = ({navigation}) => {
               <Text style = {{fontWeight: "bold"}}>Sign up</Text>
             </TouchableOpacity>   
           </View>
-        </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
       )
 }
 
