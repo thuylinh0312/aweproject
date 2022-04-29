@@ -13,7 +13,7 @@ export const SignInScreen = ({navigation}) => {
     console.log({data})
     return(
       <KeyboardAvoidingView style={{flex: 1}}
-         behavior={Platform.OS === "ios" ? "padding" : 'padding'}>
+         behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <ScrollView style={styles.container}>    
           <Text style = {styles.title}>SIGN IN</Text>
           <Image
