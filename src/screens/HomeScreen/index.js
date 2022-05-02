@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
-import {Text, View, TouchableOpacity, TextInput, Alert, StyleSheet, ScrollView, Image} from 'react-native'
+import {Text, View, TouchableOpacity, TextInput, Alert, StyleSheet, ScrollView, Image, Keyboard} from 'react-native'
 import { images } from '../../../assets'
+import {ListTask} from '../../components/ListTask'
+import { AddTask } from '../../components/AddTask'
+import { EditingTask } from '../../components/EditingTask'
 
 export const HomeScreen = ({navigation, route}) => {
     const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: true}, {name: 'Nấu cơm', isDone: false}])
@@ -10,70 +13,12 @@ export const HomeScreen = ({navigation, route}) => {
     const [showAddTaskInput, setShowAddTaskInput] = useState(false)
     const [show, setShow] = useState(false)
     const [check, setCheck] = useState(false)
+    const [editingTask, setEditingTask] = useState(undefined)
  
     return (
         <View style={{flex: 1}}>
             <Text style ={styles.title}>TODO LIST</Text>
-            <ScrollView style={styles.container}>
-            {/* <View style = {styles.text}>
-                <Text>Hello!</Text>
-                <Text>{username}</Text>
-            </View>
-            <TouchableOpacity style ={styles.back} onPress={() => navigation.goBack()}>
-                <Text>BACK</Text>
-            </TouchableOpacity> */}
-            {tasks.map((e, index) => (
-                <TouchableOpacity style={styles.item} 
-                    onLongPress={() => {
-                        Alert.alert(
-                            "Xác nhận",
-                            "Bạn có muốn xóa công việc này không ?",
-                            [
-                              {
-                                text: "Thoát",
-                                onPress: () => console.log("Cancel Pressed"),
-                              },
-                              { 
-                               text: "Xóa",
-                               onPress: () => {
-                                    const removed = tasks.filter((e, i) => index !== i)
-                                    setTasks(removed)
-                               }
-                              }
-                            ]
-                        
-                        );
-                    }}
-                >
-                    <Text key={index}>{e.name}</Text>   
-                    <View style = {{flexDirection:"row"}}>
-                        <TouchableOpacity>
-                            {!e.isDone && (<Image source={images.x} />)}
-                        </TouchableOpacity> 
-                        <TouchableOpacity>
-                            {e.isDone && (<Image source={images.check} />)} 
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                if (!showAddTaskInput) {
-                                    setShowAddTaskInput(true)
-                                } else {
-                                    setShowAddTaskInput(false)
-                                    
-                                }
-                            }}
-                        >
-                            <Image style = {{width:25, height:25}}
-                            source={images.change}/>
-                        </TouchableOpacity>
-                        
-                        
-                        
-                    </View>           
-                </TouchableOpacity>
-                
-            ))}
-            </ScrollView>
+            <ListTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask} />
 
             {/* <View style={{position: 'absolute', bottom: 20, right: 20,}}>
             {showAddTaskInput && (<TextInput onChangeText={setTaskInput} placeholder='Nhập tên công việc' />)}
@@ -91,39 +36,32 @@ export const HomeScreen = ({navigation, route}) => {
                 <Text>{!showAddTaskInput ? 'Thêm công việc' : 'OK'}</Text>
             </TouchableOpacity>
             </View> */}
-            {tasks.map((e, index) => (
-            <View>
-                
-                {showAddTaskInput && (
-                <View style = {{flexDirection:"row", justifyContent:"space-between"}} >
-                    <TextInput onChangeText={setTaskName} placeholder= {e.name}/>
-                    {!e.isDone && (<Image source={images.x} />)}
-                    {e.isDone && (<Image source={images.check} />)} 
-                    
-
-                </View>)}
-                
-            </View>
-            ))}
-            <View style = {{flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginHorizontal:25}}>
-                <TextInput 
-                    onChangeText={setTaskInput} 
-                    placeholder='Thêm công việc' />
-                <TouchableOpacity
-                onPress={()=>{
-                    if(taskInput === ""){
-                        alert("Vui lòng thêm công việc")
-                    }else {
-                        setTasks(tasks.concat({name: taskInput, isDone: false}))
+            {/* {tasks.map((e, index) => (
+                <View key={index.toString()}>
+                    {showAddTaskInput && (
+                    <View style = {{flexDirection:"row", justifyContent:"space-between"}} >
+                        <TextInput onChangeText={setTaskName} placeholder= {e.name}/>
+                        {!e.isDone && (<Image source={images.x} />)}
+                        {e.isDone && (<Image source={images.check} />)} 
                         
-                    }
-                }}
-                >
-                    <Text style = {{backgroundColor:"gray", borderRadius:500, fontSize:20}}>  +  </Text>
-                </TouchableOpacity>
-                
-            </View>
-            
+
+                    </View>)}
+                    
+                </View>
+            ))} */}
+            <AddTask taskInput={taskInput} 
+                    placeholder='Thêm công việc'
+                    setTasks={setTasks}
+                    setTaskInput={setTaskInput}
+                    onAdd={()=>{
+                        if(taskInput === ""){
+                            alert("Vui lòng thêm công việc")
+                        } else {
+                            setTaskInput('')
+                            setTasks(tasks.concat({name: taskInput, isDone: false}))
+                            Keyboard.dismiss()
+                        }
+                    }} />
         </View>
     )
 }
@@ -167,5 +105,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    editingTask: {
+        flexDirection: 'row',
+        alignItems: 'center', 
+        justifyContent: 'space-between', 
+        paddingHorizontal: 12
     }
 })
