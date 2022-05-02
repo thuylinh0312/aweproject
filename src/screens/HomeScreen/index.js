@@ -5,13 +5,15 @@ import { images } from '../../../assets'
 export const HomeScreen = ({navigation, route}) => {
     const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: true}, {name: 'Nấu cơm', isDone: false}])
     const [taskInput, setTaskInput] = useState('')
+    const [value, setValue] = useState('')
     const [taskName, setTaskName] = useState('')
     const [showAddTaskInput, setShowAddTaskInput] = useState(false)
-
+    const [show, setShow] = useState(false)
+    const [check, setCheck] = useState(false)
+ 
     return (
         <View style={{flex: 1}}>
             <Text style ={styles.title}>TODO LIST</Text>
-            
             <ScrollView style={styles.container}>
             {/* <View style = {styles.text}>
                 <Text>Hello!</Text>
@@ -21,47 +23,59 @@ export const HomeScreen = ({navigation, route}) => {
                 <Text>BACK</Text>
             </TouchableOpacity> */}
             {tasks.map((e, index) => (
-                <TouchableOpacity 
-                
-                    style={styles.item} 
+                <TouchableOpacity style={styles.item} 
                     onLongPress={() => {
                         Alert.alert(
                             "Xác nhận",
-                            "Bạn có muốn thay đổi công việc này không ?",
+                            "Bạn có muốn xóa công việc này không ?",
                             [
                               {
                                 text: "Thoát",
                                 onPress: () => console.log("Cancel Pressed"),
                               },
-                              {
-                                text: "Chỉnh sửa",
-                                onPress: () => {
-                                   
-                                }
-                                
-                              },
                               { 
                                text: "Xóa",
                                onPress: () => {
-                                const removed = tasks.filter((e, i) => index !== i)
-                                setTasks(removed)
+                                    const removed = tasks.filter((e, i) => index !== i)
+                                    setTasks(removed)
                                }
                               }
                             ]
                         
-                          );
+                        );
                     }}
                 >
-                    <Text key={index}>{e.name}</Text>
-                
-                    <TouchableOpacity>
-                        {e.isDone && (<Image source={images.check} />)}
-                        {!e.isDone && (<Image source={images.x} />)}
-                    </TouchableOpacity> 
+                    <Text key={index}>{e.name}</Text>   
+                    <View style = {{flexDirection:"row"}}>
+                        <TouchableOpacity>
+                            {!e.isDone && (<Image source={images.x} />)}
+                        </TouchableOpacity> 
+                        <TouchableOpacity>
+                            {e.isDone && (<Image source={images.check} />)} 
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                if (!showAddTaskInput) {
+                                    setShowAddTaskInput(true)
+                                } else {
+                                    setShowAddTaskInput(false)
+                                    
+                                }
+                            }}
+                        >
+                            <Image style = {{width:25, height:25}}
+                            source={images.change}/>
+                        </TouchableOpacity>
+                        
+                        
+                        
+                    </View>           
                 </TouchableOpacity>
+                
             ))}
-        </ScrollView>
-        <View style={{position: 'absolute', bottom: 20, right: 20,}}>
+            </ScrollView>
+
+            {/* <View style={{position: 'absolute', bottom: 20, right: 20,}}>
             {showAddTaskInput && (<TextInput onChangeText={setTaskInput} placeholder='Nhập tên công việc' />)}
             <TouchableOpacity 
                 style={styles.addButton}
@@ -76,10 +90,40 @@ export const HomeScreen = ({navigation, route}) => {
             >
                 <Text>{!showAddTaskInput ? 'Thêm công việc' : 'OK'}</Text>
             </TouchableOpacity>
-        </View>
-
+            </View> */}
+            {tasks.map((e, index) => (
+            <View>
                 
-     
+                {showAddTaskInput && (
+                <View style = {{flexDirection:"row", justifyContent:"space-between"}} >
+                    <TextInput onChangeText={setTaskName} placeholder= {e.name}/>
+                    {!e.isDone && (<Image source={images.x} />)}
+                    {e.isDone && (<Image source={images.check} />)} 
+                    
+
+                </View>)}
+                
+            </View>
+            ))}
+            <View style = {{flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginHorizontal:25}}>
+                <TextInput 
+                    onChangeText={setTaskInput} 
+                    placeholder='Thêm công việc' />
+                <TouchableOpacity
+                onPress={()=>{
+                    if(taskInput === ""){
+                        alert("Vui lòng thêm công việc")
+                    }else {
+                        setTasks(tasks.concat({name: taskInput, isDone: false}))
+                        
+                    }
+                }}
+                >
+                    <Text style = {{backgroundColor:"gray", borderRadius:500, fontSize:20}}>  +  </Text>
+                </TouchableOpacity>
+                
+            </View>
+            
         </View>
     )
 }
@@ -88,7 +132,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",
-        paddingHorizontal:20
+        paddingHorizontal:25
     },
     title: {
         fontSize: 30,
