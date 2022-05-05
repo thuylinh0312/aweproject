@@ -5,15 +5,18 @@ import { images } from '../../../assets'
 export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
     if (editingTask) {
         return (
-            <View style={styles.editingTask}>
-                <TextInput 
-                    onChangeText={(text) => setEditingTask({name: text, isDone: editingTask.isDone, index: editingTask.index})} 
-                    defaultValue={editingTask.name}
-                />
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity onPress={() => setEditingTask({...editingTask, isDone: !editingTask.isDone})}>
+            <View style={styles.edit}>
+                <View style={{flexDirection: 'row', alignItems:"center"}}>
+                    <TextInput 
+                        style={{flex: 4}}
+                        onChangeText={(text) => setEditingTask({name: text, isDone: editingTask.isDone, index: editingTask.index})} 
+                        defaultValue={editingTask.name}
+                    />
+                    <TouchableOpacity 
+                        onPress={() => setEditingTask({...editingTask, isDone: !editingTask.isDone})}>
                         {editingTask.isDone ? <Image source={images.check} /> : <Image source={images.x} />}
                     </TouchableOpacity>
+                </View>  
                     <TouchableOpacity 
                         onPress={() => {
                             const newArray = [...tasks]
@@ -25,10 +28,10 @@ export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
                             }else setTasks(newArray)
                             setEditingTask(undefined)
                         }} 
-                        style={{marginLeft: 20}}>
-                        <Text>OK</Text> 
+                    >
+                    <Text>OK</Text> 
                     </TouchableOpacity>
-                </View>        
+                      
             </View>
         )
     } else {
@@ -37,49 +40,12 @@ export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "white",
-        paddingHorizontal:25
+    edit: {
+        bottom: 170, 
+        backgroundColor: "gray", 
+        marginHorizontal:40, 
+        alignItems:"center", 
+        padding:12, 
+        borderRadius:15
     },
-    title: {
-        fontSize: 30,
-        fontWeight: "bold",
-        marginTop: 15,
-        alignSelf:"center"
-    },
-    text: {
-        fontWeight: "bold",
-        marginVertical: 30,
-        alignItems: "center",
-        justifyContent: "center"
-    }, 
-    back: {
-        borderRadius: 10,
-        marginBottom: 10,
-        marginHorizontal: 35,
-        alignSelf: 'center',
-        padding: 8,
-        backgroundColor: 'lightblue',
-        color: 'white',
-      },
-    item: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 7,
-        justifyContent: "space-between",
-    },
-    addButton: {
-        backgroundColor: 'lightblue',
-        padding: 10,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    editingTask: {
-        flexDirection: 'row',
-        alignItems: 'center', 
-        justifyContent: 'space-between', 
-        paddingHorizontal: 12
-    }
 })
