@@ -1,10 +1,11 @@
 import React from 'react'
 import {View, TextInput, TouchableOpacity, StyleSheet, Image, Text} from 'react-native'
 import { images } from '../../../assets'
-
+import Modal from "react-native-modal";
 export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
     if (editingTask) {
         return (
+            <Modal isVisible={true}>
             <View style={styles.edit}>
                 <View style={{flexDirection: 'row', alignItems:"center"}}>
                     <TextInput 
@@ -33,6 +34,7 @@ export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
                     </TouchableOpacity>
                       
             </View>
+            </Modal>
         )
     } else {
         return null
