@@ -18,7 +18,11 @@ export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
                         onPress={() => {
                             const newArray = [...tasks]
                             newArray[editingTask.index] = editingTask
-                            setTasks(newArray)
+                            if (editingTask.isDone === true){
+                                alert("Cong viec da hoan thanh")
+                                const newArray = tasks.filter((e, i) => editingTask.index !== i)
+                                setTasks(newArray)
+                            }else setTasks(newArray)
                             setEditingTask(undefined)
                         }} 
                         style={{marginLeft: 20}}>

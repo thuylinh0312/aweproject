@@ -13,7 +13,7 @@ export const HomeScreen = ({navigation, route}) => {
         <View style={{flex: 1}}>
             <Text style ={styles.title}>TODO LIST</Text>
             <ListTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask} />
-
+            <EditingTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask}/>
             {/* <View style={{position: 'absolute', bottom: 20, right: 20,}}>
             {showAddTaskInput && (<TextInput onChangeText={setTaskInput} placeholder='Nhập tên công việc' />)}
             <TouchableOpacity 
