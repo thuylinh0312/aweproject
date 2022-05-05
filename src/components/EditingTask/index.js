@@ -6,8 +6,10 @@ export const EditingTask = ({setEditingTask, editingTask, setTasks, tasks}) => {
     if (editingTask) {
         return (
             <View style={styles.editingTask}>
-                <TextInput onChangeText={(text) => setEditingTask({name: text, isDone: editingTask.isDone, index: editingTask.index})} 
-                           defaultValue={editingTask.name}/>
+                <TextInput 
+                    onChangeText={(text) => setEditingTask({name: text, isDone: editingTask.isDone, index: editingTask.index})} 
+                    defaultValue={editingTask.name}
+                />
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <TouchableOpacity onPress={() => setEditingTask({...editingTask, isDone: !editingTask.isDone})}>
                         {editingTask.isDone ? <Image source={images.check} /> : <Image source={images.x} />}

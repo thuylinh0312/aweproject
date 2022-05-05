@@ -1,9 +1,8 @@
 import React from 'react'
-import {ScrollView, TouchableOpacity, Text, TextInput, View, StyleSheet, Image} from 'react-native'
+import {ScrollView, TouchableOpacity, Text, TextInput, View, StyleSheet, Image, Alert} from 'react-native'
 import { images } from '../../../assets'
 
 export const ListTask = ({tasks, editingTask, setEditingTask, setTasks}) => {
-
     return (
         <ScrollView style={styles.container}>
             {/* <View style = {styles.text}>
@@ -15,7 +14,6 @@ export const ListTask = ({tasks, editingTask, setEditingTask, setTasks}) => {
             </TouchableOpacity> */}
             {tasks.map((e, index) => {
                 const isEditing = !!editingTask && editingTask.index === index
-
                 return (
                     <TouchableOpacity style={styles.item}
                         key={index.toString()}
@@ -29,35 +27,50 @@ export const ListTask = ({tasks, editingTask, setEditingTask, setTasks}) => {
                                     onPress: () => console.log("Cancel Pressed"),
                                 },
                                 { 
-                                text: "Xóa",
-                                onPress: () => {
+                                    text: "Xóa",
+                                    onPress: () => {
                                         const removed = tasks.filter((e, i) => index !== i)
                                         setTasks(removed)
-                                }
+                                    }
                                 }
                                 ]
-                            
                             );
                         }}
-                >
+                    >
                     <TextInput 
                         onChangeText={(text) => setEditingTask({name: text, isDone: editingTask.isDone, index: editingTask.index})}
-                        defaultValue={e.name} editable={isEditing} />
+                        defaultValue={e.name} 
+                        editable={isEditing} 
+                    />
                     <View style = {{flexDirection: "row"}}>
-                        <TouchableOpacity onPress={() => setEditingTask({...editingTask, isDone: !editingTask.isDone})} disabled={!isEditing}>
-                            {(!!editingTask && editingTask.index === index ? editingTask.isDone : e.isDone) ? (<Image source={images.check} />) : (<Image source={images.x} />)} 
+                        <TouchableOpacity 
+                            onPress={() => {
+                                setEditingTask({...editingTask, isDone: !editingTask.isDone})
+                                // if (editingTask.isDone === true){
+                                //     alert("Cong viec da hoan thanh")
+                                //     const removed = tasks.filter((e, i) => editingTask.index !== i)
+                                //     setTasks(removed)
+                                // }
+                            }} 
+                            disabled={!isEditing}
+                        >
+                        {(isEditing ? editingTask.isDone : e.isDone) ? (<Image source={images.check} />) : (<Image source={images.x} />)} 
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => {
+                                
                                 if (isEditing) {
                                     const newArray = [...tasks]
                                     newArray[editingTask.index] = editingTask
-                                    setTasks(newArray)
+                                    if (editingTask.isDone === true){
+                                        alert("Cong viec da hoan thanh")
+                                        const newArray = tasks.filter((e, i) => editingTask.index !== i)
+                                        setTasks(newArray)
+                                    }else setTasks(newArray)
                                     setEditingTask(undefined)
                                 } else {
                                     setEditingTask(
-                                        (!editingTask || e.name !== editingTask.name) 
-                                        ? ({...e, index}) : undefined
+                                        (!editingTask || e.name !== editingTask.name) ? ({...e, index}) : undefined
                                     )
                                 }
                                 // if (!editingTask || e.name !== editingTask.name) { // false, undefined, null, 0, '',
@@ -67,15 +80,13 @@ export const ListTask = ({tasks, editingTask, setEditingTask, setTasks}) => {
                                 // }
                             }}
                         >
-                            {isEditing ? <Text>OK</Text> : <Image style = {{width:25, height:25}}
-                                source={images.change}/>}
+                            {isEditing ? <Text>OK</Text> : <Image style = {{width:25, height:25}} source={images.change}/>}
                         </TouchableOpacity>
                     </View>           
-                </TouchableOpacity>
-                
+                    </TouchableOpacity>  
                 )
             })}
-            </ScrollView>
+        </ScrollView>
     )
 }
 

@@ -1,18 +1,12 @@
 import React, {useState} from 'react'
-import {Text, View, TouchableOpacity, TextInput, Alert, StyleSheet, ScrollView, Image, Keyboard} from 'react-native'
-import { images } from '../../../assets'
+import {Text, View, StyleSheet, Keyboard} from 'react-native'
 import {ListTask} from '../../components/ListTask'
 import { AddTask } from '../../components/AddTask'
 import { EditingTask } from '../../components/EditingTask'
 
 export const HomeScreen = ({navigation, route}) => {
-    const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: true}, {name: 'Nấu cơm', isDone: false}])
+    const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: false}, {name: 'Nấu cơm', isDone: false}])
     const [taskInput, setTaskInput] = useState('')
-    const [value, setValue] = useState('')
-    const [taskName, setTaskName] = useState('')
-    const [showAddTaskInput, setShowAddTaskInput] = useState(false)
-    const [show, setShow] = useState(false)
-    const [check, setCheck] = useState(false)
     const [editingTask, setEditingTask] = useState(undefined)
  
     return (
