@@ -11,7 +11,6 @@ export const AddTask = ({taskInput, setTaskInput, onAdd, placeholder}) => {
                 <TouchableOpacity onPress={onAdd}>
                     <Text style = {{backgroundColor:"gray", borderRadius: 500, fontSize:20}}>  +  </Text>
                 </TouchableOpacity>
-                
             </View>
     )
 }

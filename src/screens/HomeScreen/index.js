@@ -5,7 +5,7 @@ import { AddTask } from '../../components/AddTask'
 import { EditingTask } from '../../components/EditingTask'
 
 export const HomeScreen = ({navigation, route}) => {
-    const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: false}, {name: 'Nấu cơm', isDone: false}])
+    const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: false}, {name: 'Nấu cơm', isDone: false}, {name: 'Lau nhà 1', isDone: false}])
     const [taskInput, setTaskInput] = useState('')
     const [editingTask, setEditingTask] = useState(undefined)
  
@@ -43,7 +43,8 @@ export const HomeScreen = ({navigation, route}) => {
                     
                 </View>
             ))} */}
-            <AddTask taskInput={taskInput} 
+            <AddTask 
+                    taskInput={taskInput} 
                     placeholder='Thêm công việc'
                     setTasks={setTasks}
                     setTaskInput={setTaskInput}
