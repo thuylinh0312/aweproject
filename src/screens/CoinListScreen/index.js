@@ -46,15 +46,15 @@ export const CoinListScreen = () => {
                                     <Text style={{fontSize: 8 }}>{item.symbol}</Text>
                                 </View>
                             </View>
-                            <View style = {{flexDirection: "row"}}>
+                            <View style = {styles.price}>
                                 <Text style={{fontSize: 9, fontWeight:"bold"}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
-                                <View style = {{flexDirection: "row"}}>
+                                <View style = {styles.price}>
                                     {item.quote.USD.percent_change_24h > 0 ?  <Image  style = {{width:25, height:25}} source={images.up}/> : <Image style = {{width:25, height:25}} source={images.down}/>}
-                                    <Text style={{fontSize: 9 , fontWeight:"bold" }}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
+                                    <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
                                 </View>
-                                <View style = {{flexDirection: "row"}}>
+                                <View style = {styles.price}>
                                     {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {{width:25, height:25}} source={images.up}/> : <Image style = {{width:25, height:25}} source={images.down}/>}
-                                    <Text style={{fontSize: 9 , fontWeight:"bold" }}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
+                                    <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
                                 </View>
                             </View>
                             
@@ -75,7 +75,19 @@ const styles = StyleSheet.create({
     container:{
         flexDirection: "row",
         marginBottom: 5
-        
-
+    },
+    price: {
+        flexDirection: "row", 
+        alignItems: "center"
+    },
+    up: {
+        color: "blue",
+        fontSize: 9 , 
+        fontWeight:"bold"
+    },
+    down: {
+        color: "red",
+        fontSize: 9 , 
+        fontWeight:"bold"
     }
 })
