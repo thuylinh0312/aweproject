@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet, FlatList, Image} from 'react-native'
 import axios from 'axios'
+import { images } from '../../../assets'
 
 // sau khi render => goi API, lay data => set data vao state,
 // dung state de render component
@@ -39,13 +40,24 @@ export const CoinListScreen = () => {
                                 source={{uri: `https://s2.coinmarketcap.com/static/img/coins/64x64/${item.id}.png?_=5bcdbc6`}}
                             /> 
                             <View>
-                                <Text style={{fontSize: 11 , fontWeight:"bold" }}>{item.name}</Text>
+                                <Text style={{fontSize: 10 , fontWeight:"bold" }}>{item.name}</Text>
                                 <View style = {{flexDirection: "row"}}>
                                     <Text style={{width: "25%", fontSize: 8 , backgroundColor: "lightgray"}}>{item.cmc_rank}</Text>
                                     <Text style={{fontSize: 8 }}>{item.symbol}</Text>
                                 </View>
                             </View>
-                            <Text style={{fontSize: 11 }}>đ{item.quote.USD.price*22.95250}</Text>
+                            <View style = {{flexDirection: "row"}}>
+                                <Text style={{fontSize: 9, fontWeight:"bold"}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
+                                <View style = {{flexDirection: "row"}}>
+                                    {item.quote.USD.percent_change_24h > 0 ?  <Image  style = {{width:25, height:25}} source={images.up}/> : <Image style = {{width:25, height:25}} source={images.down}/>}
+                                    <Text style={{fontSize: 9 , fontWeight:"bold" }}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
+                                </View>
+                                <View style = {{flexDirection: "row"}}>
+                                    {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {{width:25, height:25}} source={images.up}/> : <Image style = {{width:25, height:25}} source={images.down}/>}
+                                    <Text style={{fontSize: 9 , fontWeight:"bold" }}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
+                                </View>
+                            </View>
+                            
                         </View>
                         
                     )
@@ -62,6 +74,7 @@ const styles = StyleSheet.create({
     },
     container:{
         flexDirection: "row",
+        marginBottom: 5
         
 
     }
