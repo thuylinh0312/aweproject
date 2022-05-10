@@ -1,13 +1,27 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Text, View, StyleSheet, Keyboard} from 'react-native'
 import {ListTask} from '../../components/ListTask'
 import { AddTask } from '../../components/AddTask'
 import { EditingTask } from '../../components/EditingTask'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+// set tasks -> lưu local storage
+// mở app lại -> load từ local storage và set vào state
 
 export const HomeScreen = ({navigation, route}) => {
     const [tasks, setTasks] = useState([{name: 'Lau nhà', isDone: false}, {name: 'Nấu cơm', isDone: false}, {name: 'Lau nhà 1', isDone: false}])
     const [taskInput, setTaskInput] = useState('')
     const [editingTask, setEditingTask] = useState(undefined)
+
+
+    useEffect(() => {
+        AsyncStorage.getItem('@KEY_tasks').then(data => {
+            const savedTasks = JSON.parse(data)
+            if (data !== null) {
+                setTasks(savedTasks)
+            }
+        })
+    }, [])
  
     return (
         <View style={{flex: 1}}>
@@ -53,7 +67,10 @@ export const HomeScreen = ({navigation, route}) => {
                             alert("Vui lòng thêm công việc")
                         } else {
                             setTaskInput('')
-                            setTasks(tasks.concat({name: taskInput, isDone: false}))
+                            const newTasks = tasks.concat({name: taskInput, isDone: false})
+                            setTasks(newTasks)
+                            const stringTasks = JSON.stringify(newTasks)
+                            AsyncStorage.setItem('@KEY_tasks', stringTasks)
                             Keyboard.dismiss()
                         }
                     }} />

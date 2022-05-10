@@ -9,8 +9,22 @@ import { images } from '../../../assets'
 // Get logo
 // https://s2.coinmarketcap.com/static/img/coins/64x64/1.png?_=5bcdbc6
 
+
+
+//Load more
+// Load 20 items
+// onReachedEnd => goi API lấy các item tiếp theo
+
 export const CoinListScreen = () => {
     const [list, setList] = useState([])
+
+    const getCoinList = (start) => {
+        axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
+                        .then(({data}) => {
+                            console.log('data tu coinmarketcap', data)
+                            setList(list.concat(data.data))
+                        })
+    }
 
     useEffect(() => {
         // fetch('https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&sort_dir=desc&limit=100')
@@ -18,10 +32,12 @@ export const CoinListScreen = () => {
         //         response.json().then(data => setList(data.data))
         //     })
 
-        axios.get('https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&sort_dir=desc&limit=20')
-            .then(({data}) => {
-                setList(data.data)
-            })
+        // axios.get('https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&sort_dir=desc&limit=20')
+        //     .then(({data}) => {
+        //         console.log('data tu coinmarketcap', data)
+        //         setList(data.data)
+        //     })
+        getCoinList(1)
     }, []) // array dependencies
 
     //console.log('list12312312321312312312312312', list)
@@ -30,7 +46,25 @@ export const CoinListScreen = () => {
     console.log('Chay return')
     return (
         <View style={styles.wrapper}>
+            <View>
+                <Text>Day la header </Text>
+            </View>
             <FlatList
+                ListHeaderComponent={(
+                    <View>
+                        <Text>Day la header 
+                    
+                        </Text>
+                    </View>
+                )}
+                ListFooterComponent={(
+<View>
+                        <Text>Day la footer 
+                    
+                        </Text>
+                    </View>
+                )}
+                onEndReached={() => getCoinList(list.length + 1)}
                 data={list}
                 renderItem={({item, index}) => {
                     return (
@@ -39,27 +73,29 @@ export const CoinListScreen = () => {
                                 style={{width: 30, height: 30, marginRight: 15}}
                                 source={{uri: `https://s2.coinmarketcap.com/static/img/coins/64x64/${item.id}.png?_=5bcdbc6`}}
                             /> 
-                            <View>
+                            <View style={{flex: 2}}>
                                 <Text style={{fontSize: 10 , fontWeight:"bold" }}>{item.name}</Text>
                                 <View style = {{flexDirection: "row"}}>
-                                    <Text style={styles.rank}>{item.cmc_rank}</Text>
+                                    <View style={{width: '25%'}}>
+                                        <View style={{width: 14, height: 14, borderRadius: 7, justifyContent: 'center', alignItems: 'center', backgroundColor: "lightgray", }}>
+                                            <Text style={styles.rank}>{item.cmc_rank}</Text>
+                                        </View>
+                                    </View>
                                     <Text style={{fontSize: 8 }}>{item.symbol}</Text>
                                 </View>
                             </View>
-                            
-                            <View style = {styles.price}>
-                                <Text style={{fontSize: 8, fontWeight:"bold"}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
-                                <View style = {styles.price}>
-                                    {item.quote.USD.percent_change_24h > 0 ?  <Image  style = {styles.icon} source={images.up}/> : <Image style = {styles.icon} source={images.down}/>}
+                            <View style={{flex: 1}} />
+                            <View style = {[styles.price, {flex: 5}]}>
+                                <Text style={{fontSize: 8, fontWeight:"bold", flex: 1}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
+                                <View style = {[styles.price, {flex: 1, backgroundColor: 'pink'}]}>
+                                    {item.quote.USD.percent_change_24h > 0 ?  <Image style = {[styles.icon, {tintColor: 'green'}]} source={images.up}/> : <Image style = {[styles.icon, {tintColor: 'red'}]} source={images.down}/>}
                                     <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
                                 </View>
-                                <View style = {styles.price}>
+                                <View style = {[styles.price, {flex: 1, backgroundColor: 'yellow', justifyContent: 'flex-start'}]}>
                                     {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {styles.icon} source={images.up}/> : <Image style = {styles.icon} source={images.down}/>}
                                     <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
                                 </View>
                             </View>
-                            
-                            
                         </View>
                         
                     )
@@ -76,16 +112,16 @@ const styles = StyleSheet.create({
     },
     container:{
         flexDirection: "row",
-        marginBottom: 5
+        marginBottom: 5,
+        paddingHorizontal: 16
     },
     rank:{
-        width: "25%", 
         fontSize: 8 , 
-        backgroundColor: "lightgray"
+        
     },
     price: {
         flexDirection: "row", 
-        alignItems: "center"
+        alignItems: "center",
     },
     up: {
         color: "blue",
