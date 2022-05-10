@@ -42,21 +42,23 @@ export const CoinListScreen = () => {
                             <View>
                                 <Text style={{fontSize: 10 , fontWeight:"bold" }}>{item.name}</Text>
                                 <View style = {{flexDirection: "row"}}>
-                                    <Text style={{width: "25%", fontSize: 8 , backgroundColor: "lightgray"}}>{item.cmc_rank}</Text>
+                                    <Text style={styles.rank}>{item.cmc_rank}</Text>
                                     <Text style={{fontSize: 8 }}>{item.symbol}</Text>
                                 </View>
                             </View>
+                            
                             <View style = {styles.price}>
-                                <Text style={{fontSize: 9, fontWeight:"bold"}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
+                                <Text style={{fontSize: 8, fontWeight:"bold"}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
                                 <View style = {styles.price}>
-                                    {item.quote.USD.percent_change_24h > 0 ?  <Image  style = {{width:25, height:25}} source={images.up}/> : <Image style = {{width:25, height:25}} source={images.down}/>}
+                                    {item.quote.USD.percent_change_24h > 0 ?  <Image  style = {styles.icon} source={images.up}/> : <Image style = {styles.icon} source={images.down}/>}
                                     <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
                                 </View>
                                 <View style = {styles.price}>
-                                    {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {{width:25, height:25}} source={images.up}/> : <Image style = {{width:25, height:25}} source={images.down}/>}
+                                    {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {styles.icon} source={images.up}/> : <Image style = {styles.icon} source={images.down}/>}
                                     <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
                                 </View>
                             </View>
+                            
                             
                         </View>
                         
@@ -76,18 +78,29 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 5
     },
+    rank:{
+        width: "25%", 
+        fontSize: 8 , 
+        backgroundColor: "lightgray"
+    },
     price: {
         flexDirection: "row", 
         alignItems: "center"
     },
     up: {
         color: "blue",
-        fontSize: 9 , 
-        fontWeight:"bold"
+        fontSize: 8 , 
+        fontWeight:"bold",
+        
     },
     down: {
         color: "red",
-        fontSize: 9 , 
-        fontWeight:"bold"
+        fontSize: 8 , 
+        fontWeight:"bold",
+        
+    },
+    icon:{
+        width:25, 
+        height:25
     }
 })
