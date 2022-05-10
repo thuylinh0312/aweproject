@@ -35,8 +35,12 @@ export const CoinListScreen = () => {
     console.log('Chay return')
     return (
         <View style={{flex: 1}}>
-            <View>
-                <Text>Day la header </Text>
+            <View style = {styles.header}>
+                <View style={{ alignItems:"center",flex: 2}} >
+                    <Text style = {styles.text_header}>Name</Text>
+                </View>
+                <View style={{flex: 1}} />
+                <Text style = {styles.text_header}> Price    24h %    7d % </Text>
             </View>
             <FlatList
                 // ListHeaderComponent={(
@@ -91,6 +95,16 @@ export const CoinListScreen = () => {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flexDirection: "row", 
+        padding: 3 ,
+        marginBottom: 5, 
+        backgroundColor: "lightgray"
+    },
+    text_header: {
+        fontSize: 13, 
+        fontWeight: "bold"
+    },
     container:{
         flexDirection: "row",
         marginBottom: 5,
