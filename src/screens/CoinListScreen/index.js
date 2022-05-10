@@ -90,11 +90,24 @@ export const CoinListScreen = () => {
                     )     
                 }}
             />
+            <View style = {styles.footer}>
+                <Image  source={images.home}/>
+                <Image  source={images.chart}/>
+                <Image source={images.feed}/>
+                <Image  source={images.setting}/>
+            </View>  
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    footer: {
+        backgroundColor: "lightgray",
+        padding: 5 ,
+        marginTop: 5, 
+        flexDirection: "row", 
+        justifyContent: "space-between"
+    },
     header: {
         flexDirection: "row", 
         padding: 3 ,
