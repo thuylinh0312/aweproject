@@ -32,7 +32,7 @@ export const CoinListScreen = () => {
         getCoinList(1)
     }, []) // array dependencies
 
-    console.log('Chay return')
+    // console.log('Chay return')
     return (
         <View style={{flex: 1}}>
             <View style = {styles.header}>
