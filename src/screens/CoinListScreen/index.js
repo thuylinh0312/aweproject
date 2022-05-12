@@ -90,12 +90,12 @@ export const CoinListScreen = () => {
                     )     
                 }}
             />
-            <View style = {styles.footer}>
+            {/* <View style = {styles.footer}>
                 <Image  source={images.home}/>
                 <Image  source={images.chart}/>
                 <Image source={images.feed}/>
                 <Image  source={images.setting}/>
-            </View>  
+            </View>   */}
         </View>
     )
 }

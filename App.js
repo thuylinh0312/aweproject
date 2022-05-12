@@ -19,7 +19,7 @@ const YourApp = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        <Stack.Screen name='Tabs' component={Tabs}/>
+        <Stack.Screen options={{headerShown: false}} name='Tabs' component={Tabs}/>
         {/* <Stack.Screen name='Coin List' component={CoinListScreen}/> */}
         {/* <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Sign In" component={SignInScreen} />
