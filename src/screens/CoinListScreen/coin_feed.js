@@ -1,6 +1,6 @@
 import React from "react";
 import {Text, View, StyleSheet} from "react-native"
-export const coin_feed = ({navigation})=> {
+export const CoinFeed = ({navigation})=> {
     return (
         <Text>Feed</Text>
     )

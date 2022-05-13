@@ -13,9 +13,30 @@ import { images } from '../../../assets'
 
 export const CoinListScreen = () => {
     const [list, setList] = useState([])
-    const getCoinList = (start) => {
-        axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
-                .then(({data}) => {setList(list.concat(data.data))})
+    // const getCoinList = (start) => {
+    //     axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
+    //             .then(({data}) => {
+    //                 setList(list.concat(data.data))
+    //                 console.log('thennnnnnnnnnn')
+    //             })
+    //             .catch((error) => {
+    //                 console.log('eeeeeee', error)
+    //             })
+
+    //     console.log('sau then catch')
+
+    // }
+
+    const getCoinList = async (start) => {
+        try {
+            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
+            setList(list.concat(data.data))
+            console.log('awwwai')
+        } catch (e) {
+            console.log('eeeeeee', error)
+        }
+
+        console.log('sau try catch')
     }
 
     useEffect(() => {
