@@ -7,8 +7,7 @@ import { images } from '../../../assets'
 // dung state de render component
 
 
-//Load more
-// Load 20 items
+//Load more Load 20 items
 // onReachedEnd => goi API lấy các item tiếp theo
 
 export const CoinListScreen = () => {
@@ -22,9 +21,7 @@ export const CoinListScreen = () => {
     //             .catch((error) => {
     //                 console.log('eeeeeee', error)
     //             })
-
-    //     console.log('sau then catch')
-
+    // console.log('sau then catch')
     // }
 
     const getCoinList = async (start) => {
@@ -35,8 +32,7 @@ export const CoinListScreen = () => {
         } catch (e) {
             console.log('eeeeeee', error)
         }
-
-        console.log('sau try catch')
+        //console.log('sau try catch')
     }
 
     useEffect(() => {
@@ -53,7 +49,6 @@ export const CoinListScreen = () => {
         getCoinList(1)
     }, []) // array dependencies
 
-    // console.log('Chay return')
     return (
         <View style={{flex: 1}}>
             <View style = {styles.header}>
@@ -61,7 +56,10 @@ export const CoinListScreen = () => {
                     <Text style = {styles.text_header}>Name</Text>
                 </View>
                 <View style={{flex: 1}} />
-                <Text style = {styles.text_header}> Price    24h %    7d % </Text>
+                <View style={{ alignItems:"center"}}>
+                    <Text style = {styles.text_header}> Price    24h %    7d % </Text>
+                </View>
+                
             </View>
             <FlatList
                 // ListHeaderComponent={(
@@ -111,24 +109,11 @@ export const CoinListScreen = () => {
                     )     
                 }}
             />
-            {/* <View style = {styles.footer}>
-                <Image  source={images.home}/>
-                <Image  source={images.chart}/>
-                <Image source={images.feed}/>
-                <Image  source={images.setting}/>
-            </View>   */}
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    footer: {
-        backgroundColor: "lightgray",
-        padding: 5 ,
-        marginTop: 5, 
-        flexDirection: "row", 
-        justifyContent: "space-between"
-    },
     header: {
         flexDirection: "row", 
         padding: 3 ,
