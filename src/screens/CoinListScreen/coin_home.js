@@ -23,23 +23,13 @@ export const CoinHome = ({navigation})=> {
         }, 1000)
     }
     let time = {minute: minute, second: count}
-    const reset = () => {
-        setCount(0);
-        setMinute(0);
+    const handle = () => {
+        if(check === false){
+            setCount(0);
+            setMinute(0);
+        } else alert(time)
+        
     }
-    // const callDelay = () => {
-    //     delayPromise(5000)
-    //         .then(() => {
-    //             alert('Sau 3 giay')
-    //         }).catch((e) => {
-    //             console.log(e)
-    //         }).finally(() => {
-    //             console.log('finallllllllllllllllyyy')
-    //         })
-
-    //         alert('123123123')
-    // }
-
     // const callDelay = async () => {
     //     try {
     //         const data = await delayPromise(5000)
@@ -68,7 +58,7 @@ export const CoinHome = ({navigation})=> {
 
     return (
         <View style={{ flex: 1, }}>
-            <View style = {{backgroundColor: "white", padding: 10, alignItems: "center"}}>
+            <View style = {styles.time}>
                 <Text >{minute} : {count}</Text>
                 
             </View>
@@ -81,7 +71,7 @@ export const CoinHome = ({navigation})=> {
                 </TouchableOpacity>
                 <TouchableOpacity  
                     style = {styles.button}
-                    onPress={() => reset()}
+                    onPress={() => handle()}
                 >
                     {check === false ? <Text>Đặt lại</Text> : <Text>Vòng chạy</Text>}
                 </TouchableOpacity>
@@ -90,6 +80,11 @@ export const CoinHome = ({navigation})=> {
     )
 }
  const styles = StyleSheet.create({
+     time: {
+        backgroundColor: "white", 
+        padding: 10, 
+        alignItems: "center"
+     },
      button: {
         backgroundColor: "white", 
         padding: 10, 
