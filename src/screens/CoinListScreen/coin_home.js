@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import {Text, View, StyleSheet, TouchableOpacity} from "react-native"
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from "react-native"
 import { delayPromise } from "../../utils/common";
 
 // setTimeout, setInterval
@@ -20,15 +20,17 @@ export const CoinHome = ({navigation})=> {
                 setCount(0);
                 setMinute(minute => minute + 1)
             }
-        }, 1000)
+        }, 100)
     }
-    let time = {minute: minute, second: count}
+    let time = [{minute: 0, second: 0}]
     const handle = () => {
         if(check === false){
             setCount(0);
             setMinute(0);
-        } else alert(time)
-        
+        } else {
+            time = time.concat({minute: minute, second: count})
+            console.log(time)  
+        } 
     }
     // const callDelay = async () => {
     //     try {
@@ -57,12 +59,10 @@ export const CoinHome = ({navigation})=> {
     }, [check, count])
 
     return (
-        <View style={{ flex: 1, }}>
+        <View style={{ flex: 1}}>
             <View style = {styles.time}>
-                <Text >{minute} : {count}</Text>
-                
+                <Text >{minute} : {count}</Text> 
             </View>
-           
             <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop:10}}>
                 <TouchableOpacity 
                     style = {styles.button}
@@ -75,6 +75,18 @@ export const CoinHome = ({navigation})=> {
                 >
                     {check === false ? <Text>Đặt lại</Text> : <Text>Vòng chạy</Text>}
                 </TouchableOpacity>
+            </View>
+            <View>
+                    <FlatList
+                    data={time}
+                    renderItem={({item, index}) => {
+                        return (    
+                            <View style={{flex: 1}}>
+                                <Text style={{fontSize: 15 , fontWeight:"bold" }}>{item.minute} : {item.second}</Text>   
+                            </View>
+                        )     
+                    }}
+                    />
             </View>
         </View>
     )
