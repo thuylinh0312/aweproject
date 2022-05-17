@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from "react-native"
-import { delayPromise } from "../../utils/common";
+import { TimerButton } from "../../components/TimerButton";
 
 // setTimeout, setInterval
 // xử lý bất đồng bộ: asynchorous
@@ -9,27 +9,36 @@ import { delayPromise } from "../../utils/common";
 export const CoinHome = ({navigation})=> {
     const [check, setCheck] = useState(false)
     const [minute, setMinute] = useState(0)
-    const [count, setCount] = useState(0)
+    const [second, setSecond] = useState(0)
+    const [time, setTime] = useState([{minute: 0, second: 0}])
     const interval = useRef()
 
    
     const startCount = () => {
         interval.current = setInterval(() => {
-            setCount(count => count + 1)
-            if (count === 59){
-                setCount(0);
-                setMinute(minute => minute + 1)
+            let isAddMinute = false
+            setSecond(sec => {
+                if (sec === 59){
+                    isAddMinute = true
+                    return 0
+                } else {
+                    return sec + 1
+                }
+            })
+
+            if (isAddMinute) {
+                setMinute(min => {
+                    return min + 1
+                })
             }
         }, 100)
     }
-    let time = [{minute: 0, second: 0}]
     const handle = () => {
         if(check === false){
-            setCount(0);
+            setSecond(0);
             setMinute(0);
         } else {
-            time = time.concat({minute: minute, second: count})
-            console.log(time)  
+           setTime(time.concat({minute, second}))
         } 
     }
     // const callDelay = async () => {
@@ -46,46 +55,58 @@ export const CoinHome = ({navigation})=> {
     //     }
     // }
 
+    const timeFormatted = time.map(({minute, second}) => {
+        return {
+            minute: minute + 'm',
+            second: second + 's'
+        }
+    })
 
     useEffect(() => {
-    // callDelay()
-        if (check === true){
+        // chay 1 lan duy nhat sau khi render
+        
+    }, [])
+
+    useEffect(() => {
+        console.log('check', check, 'second', second)
+        // callDelay()
+        if (check){
             startCount()
         }
         
         return () => {
             clearInterval(interval.current)
         }
-    }, [check, count])
+    }, [check]) // array of dependencies
+
+    useEffect(() => {
+
+    }, [/** dependencies */])
+
 
     return (
         <View style={{ flex: 1}}>
             <View style = {styles.time}>
-                <Text >{minute} : {count}</Text> 
+                <Text >{minute} : {second}</Text> 
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-around", marginTop:10}}>
-                <TouchableOpacity 
-                    style = {styles.button}
-                    onPress={() => setCheck(!check)}>
-                    {check === false ? <Text>Bắt đầu</Text> : <Text>Tạm dừng</Text>}
-                </TouchableOpacity>
-                <TouchableOpacity  
-                    style = {styles.button}
-                    onPress={() => handle()}
-                >
-                    {check === false ? <Text>Đặt lại</Text> : <Text>Vòng chạy</Text>}
-                </TouchableOpacity>
+                <TimerButton 
+                    onPressButton={() => setCheck(!check)} 
+                    text={!check ? 'Bắt đầu' : 'Tạm dừng'} 
+                />
+                <TimerButton 
+                    onPressButton={() => handle()} 
+                    text={!check ? 'Đặt lại' : 'Vòng chạy'} 
+                />
             </View>
-            <View>
+            <View style={{flex: 1}}>
                     <FlatList
-                    data={time}
-                    renderItem={({item, index}) => {
-                        return (    
-                            <View style={{flex: 1}}>
+                        data={timeFormatted}
+                        renderItem={({item, index}) => {
+                            return (    
                                 <Text style={{fontSize: 15 , fontWeight:"bold" }}>{item.minute} : {item.second}</Text>   
-                            </View>
-                        )     
-                    }}
+                            )     
+                        }}
                     />
             </View>
         </View>

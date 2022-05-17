@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Text, View, StyleSheet, Keyboard} from 'react-native'
+import {Text, View, StyleSheet, Keyboard, TouchableOpacity} from 'react-native'
 import {ListTask} from '../../components/ListTask'
 import { AddTask } from '../../components/AddTask'
 import { EditingTask } from '../../components/EditingTask'
@@ -25,6 +25,9 @@ export const HomeScreen = ({navigation, route}) => {
  
     return (
         <View style={{flex: 1}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Tabs')}>
+                <Text>Go to Coin tab</Text>
+            </TouchableOpacity>
             <Text style ={styles.title}>TODO LIST</Text>
             <ListTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask} />
             <EditingTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask}/>
