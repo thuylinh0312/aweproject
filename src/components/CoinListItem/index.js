@@ -5,35 +5,36 @@ import { images } from '../../../assets'
 export const CoinListItem = ({item}) => {
     return (
         <View style = {styles.container}>
-                            <Image 
-                                style={styles.image}
-                                source={{uri: `https://s2.coinmarketcap.com/static/img/coins/64x64/${item.id}.png?_=5bcdbc6`}}
-                            /> 
-                            <View style={{flex: 2}}>
-                                <Text style={{fontSize: 10 , fontWeight:"bold" }}>{item.name}</Text>
-                                <View style = {{flexDirection: "row"}}>
-                                    <View style={{width: '25%'}}>
-                                        <View style={styles.rank}>
-                                            <Text style={{fontSize: 8}}>{item.cmc_rank}</Text>
-                                        </View>
-                                    </View>
-                                    <Text style={{fontSize: 8 }}>{item.symbol}</Text>
-                                </View>
-                            </View>
-                            <View style={{flex: 1}} />
+            <Image 
+                style={styles.image}
+                source={{uri: `https://s2.coinmarketcap.com/static/img/coins/64x64/${item.id}.png?_=5bcdbc6`}}
+            /> 
+            <View style={{flex: 2}}>
+                <Text style={{fontSize: 10 , fontWeight:"bold" }}>{item.name}</Text>
+                <View style = {{flexDirection: "row"}}>
+                    <View style={{width: '25%'}}>
+                        <View style={styles.rank}>
+                            <Text style={{fontSize: 8}}>{item.cmc_rank}</Text>
+                        </View>
+                    </View>
+                    <Text style={{fontSize: 8 }}>{item.symbol}</Text>
+                </View>
+            </View>
 
-                            <View style = {styles.price}>
-                                <Text style={{fontSize: 8, fontWeight:"bold", flex: 1}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
-                                <View style = {styles.day}>
-                                    {item.quote.USD.percent_change_24h > 0 ?  <Image style = {styles.icon_up} source={images.up}/> : <Image style = {styles.icon_down} source={images.down}/>}
-                                    <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
-                                </View>
-                                <View style = {styles.week}>
-                                    {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {styles.icon_up} source={images.up}/> : <Image style = {styles.icon_down} source={images.down}/>}
-                                    <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
-                                </View>
-                            </View>
-                        </View> 
+            <View style={{flex: 1}} />
+
+            <View style = {styles.price}>
+                <Text style={{fontSize: 8, fontWeight:"bold", flex: 1}}>đ{(item.quote.USD.price*22.95250).toFixed(2)}</Text>
+                <View style = {styles.day}>
+                    {item.quote.USD.percent_change_24h > 0 ?  <Image style = {styles.icon_up} source={images.up}/> : <Image style = {styles.icon_down} source={images.down}/>}
+                    <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_24h).toFixed(2)}%</Text>
+                </View>
+                <View style = {styles.week}>
+                    {item.quote.USD.percent_change_7d > 0 ?  <Image  style = {styles.icon_up} source={images.up}/> : <Image style = {styles.icon_down} source={images.down}/>}
+                    <Text style = {item.quote.USD.percent_change_7d > 0 ? styles.up  : styles.down}>{Math.abs(item.quote.USD.percent_change_7d).toFixed(2)}%</Text>
+                </View>
+            </View>
+        </View> 
     )
 }
 

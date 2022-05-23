@@ -30,11 +30,7 @@ export class CoinSetting extends React.Component {
         // clear setInterval setTimeout, unsubcribe
         console.log('componentWillUnmount')
     }
-
-    shouldComponentUpdate() {
-        
-    }
-
+    
     render() {
         console.log('component render')
         return (

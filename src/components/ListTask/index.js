@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {FlatList, TouchableOpacity, Text, TextInput, View, StyleSheet, Image, Alert} from 'react-native'
 import { images } from '../../../assets'

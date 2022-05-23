@@ -31,52 +31,24 @@ export const HomeScreen = ({navigation, route}) => {
             <Text style ={styles.title}>TODO LIST</Text>
             <ListTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask} />
             <EditingTask setTasks={setTasks} tasks={tasks} editingTask={editingTask} setEditingTask={setEditingTask}/>
-            {/* <View style={{position: 'absolute', bottom: 20, right: 20,}}>
-            {showAddTaskInput && (<TextInput onChangeText={setTaskInput} placeholder='Nhập tên công việc' />)}
-            <TouchableOpacity 
-                style={styles.addButton}
-                onPress={() => {
-                    if (!showAddTaskInput) {
-                        setShowAddTaskInput(true)
-                    } else {
-                        setShowAddTaskInput(false)
-                        setTasks(tasks.concat({name: taskInput, isDone: false}))
-                    }
-                }}
-            >
-                <Text>{!showAddTaskInput ? 'Thêm công việc' : 'OK'}</Text>
-            </TouchableOpacity>
-            </View> */}
-            {/* {tasks.map((e, index) => (
-                <View key={index.toString()}>
-                    {showAddTaskInput && (
-                    <View style = {{flexDirection:"row", justifyContent:"space-between"}} >
-                        <TextInput onChangeText={setTaskName} placeholder= {e.name}/>
-                        {!e.isDone && (<Image source={images.x} />)}
-                        {e.isDone && (<Image source={images.check} />)} 
-                        
-
-                    </View>)}
-                    
-                </View>
-            ))} */}
             <AddTask 
-                    taskInput={taskInput} 
-                    placeholder='Thêm công việc'
-                    setTasks={setTasks}
-                    setTaskInput={setTaskInput}
-                    onAdd={()=>{
-                        if(taskInput === ""){
-                            alert("Vui lòng thêm công việc")
-                        } else {
-                            setTaskInput('')
-                            const newTasks = tasks.concat({name: taskInput, isDone: false})
-                            setTasks(newTasks)
-                            const stringTasks = JSON.stringify(newTasks)
-                            AsyncStorage.setItem('@KEY_tasks', stringTasks)
-                            Keyboard.dismiss()
-                        }
-                    }} />
+                taskInput={taskInput} 
+                placeholder='Thêm công việc'
+                setTasks={setTasks}
+                setTaskInput={setTaskInput}
+                onAdd={()=>{
+                    if(taskInput === ""){
+                        alert("Vui lòng thêm công việc")
+                    } else {
+                        setTaskInput('')
+                        const newTasks = tasks.concat({name: taskInput, isDone: false})
+                        setTasks(newTasks)
+                        const stringTasks = JSON.stringify(newTasks)
+                        AsyncStorage.setItem('@KEY_tasks', stringTasks)
+                        Keyboard.dismiss()
+                    }
+                }} 
+            />
         </View>
     )
 }

@@ -2,10 +2,6 @@ import React, {useEffect, useState, useRef} from "react";
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from "react-native"
 import { TimerButton } from "../../components/TimerButton";
 
-// setTimeout, setInterval
-// xử lý bất đồng bộ: asynchorous
-// Promise
-
 export const CoinHome = ({navigation})=> {
     const [check, setCheck] = useState(false)
     const [minute, setMinute] = useState(0)
@@ -13,7 +9,6 @@ export const CoinHome = ({navigation})=> {
     const [time, setTime] = useState([{minute: 0, second: 0}])
     const interval = useRef()
 
-   
     const startCount = () => {
         interval.current = setInterval(() => {
             let isAddMinute = false
@@ -63,27 +58,13 @@ export const CoinHome = ({navigation})=> {
     })
 
     useEffect(() => {
-        // chay 1 lan duy nhat sau khi render
-        
-    }, [])
-
-    useEffect(() => {
-        console.log('check', check, 'second', second)
-        // callDelay()
         if (check){
             startCount()
         }
-        
         return () => {
             clearInterval(interval.current)
         }
     }, [check]) // array of dependencies
-
-    useEffect(() => {
-
-    }, [/** dependencies */])
-
-
     return (
         <View style={{ flex: 1}}>
             <View style = {styles.time}>
@@ -113,17 +94,17 @@ export const CoinHome = ({navigation})=> {
     )
 }
  const styles = StyleSheet.create({
-     time: {
+    time: {
         backgroundColor: "white", 
         padding: 10, 
         alignItems: "center"
-     },
-     button: {
+    },
+    button: {
         backgroundColor: "white", 
         padding: 10, 
         borderColor: "black", 
         borderWidth:2, borderRadius:10
-     }
+    }
 })
 
  
