@@ -1,37 +1,57 @@
 import React from "react";
-import {Text, View, TouchableOpacity} from "react-native"
+import {Text, View, TouchableOpacity, FlatList, ActivityIndicator} from "react-native"
+import axios from 'axios'
+import { CoinListHeader } from '../../components/CoinListHeader'
+import { CoinListItem } from '../../components/CoinListItem'
+
 export class CoinFeed extends React.Component {
     state = {
         count: 0,
-        count1: 0,
-        ///
+        list: [],
     }
-
-    // Lifecycle
-
-    componentDidMount() {
-        // chi chay 1 lan duy nhat
-        // call API
-        console.log('componentDidMount', this.props, this.state)
+    getCoinList = async (start) => {
+        try {
+            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
+            this.setState({
+                list: this.state.list.concat(data.data)
+            })
+        } catch (e) {
+            console.log('eeeeeee', error)
+        }
+}
+    async componentDidMount() {
+        // const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=20&sort_dir=desc&limit=20`)
+        // this.setState({
+        //      list: this.state.list.concat(data.data)
+        // })
+        this.getCoinList(1)
     }
-
-    componentWillUnmount() {
-        // clear setInterval setTimeout, unsubcribe
-        console.log('componentWillUnmount')
-    }
-    
     render() {
-        console.log('component render')
         return (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-                <TouchableOpacity
-                    onPress={() => this.setState({count: this.state.count + 1})}
-                    style={{padding: 10, backgroundColor: 'red', borderRadius: 10, marginTop: 20}}
-                >
-                    <Text>Count</Text>
-                </TouchableOpacity>
-                <Text>{this.state.count}</Text>
+            <View style={{flex: 1}}>
+                <CoinListHeader />
+                {this.state.list.length === 0 ? <ActivityIndicator /> : (
+                    <FlatList
+                    onEndReached={() => this.getCoinList(this.state.list.length + 1)}
+                        data={this.state.list}
+                        renderItem={({item, index}) => {
+                            return (
+                                <CoinListItem item={item} />
+                            )     
+                        }}
+                        ListFooterComponent={<ActivityIndicator />}
+                    />
+                )}
             </View>
+            // <View style={{flex: 1, alignItems: 'flex-start'}}>
+            //     <TouchableOpacity
+            //         onPress={() => this.setState({count: this.state.count + 1})}
+            //         style={{padding: 10, backgroundColor: 'red', borderRadius: 10, marginTop: 20}}
+            //     >
+            //         <Text>Count</Text>
+            //     </TouchableOpacity>
+            //     <Text>{this.state.count}</Text>
+            // </View>
         )
     }
 }
