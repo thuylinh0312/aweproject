@@ -6,7 +6,7 @@ export let data = [
   {username: 'phantrungviet2', password: '1234562'},
   {username: 'phantrungviet3', password: '1234563'},
 ]
-console.log(data)
+
 export const SignUpScreen = ({navigation}) => {
 
   const [username, onChangeUsername] = React.useState('');
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         padding:10
     },
     title: {
-        fontSize: 30,
+      fontSize: 30,
       fontWeight: "bold",
       marginTop: 30,
       alignSelf:"center"

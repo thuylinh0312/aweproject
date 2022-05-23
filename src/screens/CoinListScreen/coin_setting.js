@@ -35,7 +35,6 @@ export class CoinSetting extends React.Component {
         console.log('component render')
         return (
             <View style={{flex: 1, alignItems: 'flex-start'}}>
-                <Text>Setting</Text>
                 <TouchableOpacity
                     onPress={() => this.setState({count: this.state.count + 1})}
                     style={{padding: 10, backgroundColor: 'red', borderRadius: 10, marginTop: 20}}
