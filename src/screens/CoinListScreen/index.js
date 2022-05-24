@@ -21,9 +21,9 @@ export const CoinListScreen = () => {
     // console.log('sau then catch')
     // }
 
-    const getCoinList = async (start) => {
+    const getCoinList = async (start) => { //lazy load
         try {
-            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
+            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=1000`)
             setList(list.concat(data.data))
         } catch (e) {
             console.log('eeeeeee', error)

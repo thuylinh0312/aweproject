@@ -12,11 +12,9 @@ export const CoinListItem = ({item}) => {
             <View style={{flex: 2}}>
                 <Text style={{fontSize: 10 , fontWeight:"bold" }}>{item.name}</Text>
                 <View style = {{flexDirection: "row"}}>
-                    <View style={{width: '25%'}}>
-                        <View style={styles.rank}>
+                <View style={styles.rank}>
                             <Text style={{fontSize: 8}}>{item.cmc_rank}</Text>
                         </View>
-                    </View>
                     <Text style={{fontSize: 8 }}>{item.symbol}</Text>
                 </View>
             </View>
@@ -50,9 +48,10 @@ const styles = StyleSheet.create({
         marginRight: 15
     },
     rank:{
-        width: 14, 
-        height: 14, 
-        borderRadius: 7, 
+        minWidth: 14, 
+        minHeight: 14,
+        borderRadius: 7,
+        paddingHorizontal: 2,
         justifyContent: 'center', 
         alignItems: 'center', 
         backgroundColor: "lightgray"  

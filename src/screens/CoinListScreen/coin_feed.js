@@ -4,6 +4,7 @@ import axios from 'axios'
 import { CoinListHeader } from '../../components/CoinListHeader'
 import { CoinListItem } from '../../components/CoinListItem'
 
+
 export class CoinFeed extends React.Component {
     state = {
         count: 0,
@@ -18,7 +19,7 @@ export class CoinFeed extends React.Component {
         } catch (e) {
             console.log('eeeeeee', error)
         }
-}
+    }
     async componentDidMount() {
         // const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=20&sort_dir=desc&limit=20`)
         // this.setState({
@@ -26,7 +27,19 @@ export class CoinFeed extends React.Component {
         // })
         this.getCoinList(1)
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate')
+        if (this.state.list.length > 100) {
+            return false
+        } else {
+            console.log('this.state.list.length', this.state.list.length)
+            return true
+        }
+    }
+
     render() {
+        console.log('render')
         return (
             <View style={{flex: 1}}>
                 <CoinListHeader />
@@ -55,48 +68,3 @@ export class CoinFeed extends React.Component {
         )
     }
 }
-
-
-
-// import React, {useEffect, useState} from 'react'
-// import {View, FlatList, ActivityIndicator} from 'react-native'
-// import axios from 'axios'
-// import { CoinListHeader } from '../../components/CoinListHeader'
-// import { CoinListItem } from '../../components/CoinListItem'
-
-// export const CoinListScreen = () => {
-//     const [list, setList] = useState([])
-
-
-//     const getCoinList = async (start) => {
-//         try {
-//             const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
-//             setList(list.concat(data.data))
-//         } catch (e) {
-//             console.log('eeeeeee', error)
-//         }
-//     }
-
-//     useEffect(() => {
-//         getCoinList(1)
-//     }, []) 
-
-//     return (
-//         <View style={{flex: 1}}>
-//             <CoinListHeader />
-//             {list.length === 0 ? <ActivityIndicator /> : (
-//                 <FlatList
-//                 onEndReached={() => getCoinList(list.length + 1)}
-//                 data={list}
-//                 renderItem={({item, index}) => {
-//                     return (
-//                         <CoinListItem item={item} />
-//                     )     
-//                 }}
-//                 ListFooterComponent={<ActivityIndicator />}
-//             />
-//             )}
-//         </View>
-//     )
-// }
-
