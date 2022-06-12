@@ -8,10 +8,10 @@ import {SignUpScreen} from './src/screens/SignUpScreen'
 import {HomeScreen} from './src/screens/HomeScreen'
 import { CoinListScreen } from "./src/screens/CoinListScreen";
 import { Tabs } from "./src/screens/CoinListScreen/tabs";
+import { Hooks } from "./src/hooks/hooks";
+import { UseReducerScreen } from "./src/hooks/useReducer"; 
 const Stack = createNativeStackNavigator();
 
-// https://pro-api.coinmarketcap.com => BASE_URL
-// 
 
 const YourApp = () => {
   // return <Example1 />
@@ -19,14 +19,16 @@ const YourApp = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        <Stack.Screen options={{headerShown: false}} name='Tabs' component={Tabs}/>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Hooks" component={Hooks} />
+        <Stack.Screen name="UseReducer" component={UseReducerScreen} />
+        {/* <Stack.Screen options={{headerShown: false}} name='Tabs' component={Tabs}/>
+        <Stack.Screen name="Home" component={HomeScreen} /> */}
         {/* <Stack.Screen name='Coin List' component={CoinListScreen}/> */}
         {/* 
         <Stack.Screen name="Sign In" component={SignInScreen} />
         <Stack.Screen name="Sign Up" component={SignUpScreen} /> */}
         
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+       
       </Stack.Navigator>
     </NavigationContainer>
   )

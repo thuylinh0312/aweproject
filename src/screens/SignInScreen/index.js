@@ -1,11 +1,6 @@
 import React from 'react'
 import {View, Text, Image, TextInput,ScrollView, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native'
 import { data } from '../SignUpScreen';
-// const data = [
-//     {username: 'phantrungviet1', password: '1234561'},
-//     {username: 'phantrungviet2', password: '1234562'},
-//     {username: 'phantrungviet3', password: '1234563'},
-//   ]
 
 export const SignInScreen = ({navigation}) => {
     const [username, onChangeUsername] = React.useState('');
