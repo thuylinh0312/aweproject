@@ -82,6 +82,16 @@ export const Hooks = ({navigation}) => {
                 > 
                 <Text style = {{backgroundColor: "lightblue", padding:5}}>X</Text>
                 </TouchableOpacity>         
+            </View>
+
+            <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
+                <Text>useImperativeHandle</Text>
+                <View style = {{flex: 1}}></View>
+                <TouchableOpacity 
+                    onPress={() => navigation.navigate("UseImperativeHandle")}
+                > 
+                    <Text style = {{backgroundColor: "lightblue", padding:5}}>X</Text>
+                </TouchableOpacity>         
             </View> 
             
         </View>

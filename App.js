@@ -17,6 +17,8 @@ import { UseLayoutEffectScreen } from "./src/hooks/useLayoutEffect";
 import { UseTransitionScreen } from "./src/hooks/useTransition";
 import { UseDeferredValueScreen } from "./src/hooks/useDeferredValue";
 import { UseContextScreen } from "./src/hooks/useContext/compA";
+import {UseImperativeHandle} from './src/hooks/useImperativeHandle'
+
 const Stack = createNativeStackNavigator();
 
 
@@ -35,6 +37,7 @@ const YourApp = () => {
         <Stack.Screen name="UseTransition" component={UseTransitionScreen} />
         <Stack.Screen name="UseDeferredValue" component={UseDeferredValueScreen} />
         <Stack.Screen name="UseLayoutEffect" component={UseLayoutEffectScreen} />
+        <Stack.Screen name='UseImperativeHandle' component={UseImperativeHandle} />
 
         {/* <Stack.Screen options={{headerShown: false}} name='Tabs' component={Tabs}/>
         <Stack.Screen name="Home" component={HomeScreen} /> */}

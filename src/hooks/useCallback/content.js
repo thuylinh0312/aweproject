@@ -1,7 +1,7 @@
 import React, { memo} from 'react'
 import {View, TouchableOpacity, Text} from 'react-native'
 
-const Content = ({onIncrease}) => {
+const Content = memo(({onIncrease}) => {
     return (
         <View>
             <Text style= {{marginBottom:10, fontWeight: "bold"}}>useCallback</Text>
@@ -10,5 +10,5 @@ const Content = ({onIncrease}) => {
             </TouchableOpacity>   
         </View>
     )
-}
-export default memo(Content)
+})
+export default Content
