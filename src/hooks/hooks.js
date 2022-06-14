@@ -5,6 +5,16 @@ export const Hooks = ({navigation}) => {
     return (
         <View style = {{ flex: 1, padding: 10}}>
             <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
+                <Text>useRef</Text>
+                <View style = {{flex: 1}}></View>
+                <TouchableOpacity 
+                    onPress={() => navigation.navigate("UseRef")}
+                > 
+                <Text style = {{backgroundColor: "lightblue", padding:5}}>X</Text>
+                </TouchableOpacity>         
+            </View> 
+
+            <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
                 <Text>useReducer</Text>
                 <View style = {{flex: 1}}></View>
                 <TouchableOpacity 
@@ -29,6 +39,16 @@ export const Hooks = ({navigation}) => {
                 <View style = {{flex: 1}}></View>
                 <TouchableOpacity 
                     onPress={() => navigation.navigate("UseMemo")}
+                > 
+                <Text style = {{backgroundColor: "lightblue", padding:5}}>X</Text>
+                </TouchableOpacity>         
+            </View> 
+
+            <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
+                <Text>useLayoutEffect</Text>
+                <View style = {{flex: 1}}></View>
+                <TouchableOpacity 
+                    onPress={() => navigation.navigate("UseLayoutEffect")}
                 > 
                 <Text style = {{backgroundColor: "lightblue", padding:5}}>X</Text>
                 </TouchableOpacity>         

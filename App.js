@@ -12,6 +12,8 @@ import { Hooks } from "./src/hooks/hooks";
 import { UseReducerScreen } from "./src/hooks/useReducer"; 
 import { UseCallbackScreen } from "./src/hooks/useCallback";
 import { UseMemoScreen } from "./src/hooks/useMemo";
+import { UseRefScreen } from "./src/hooks/useRef";
+import { UseLayoutEffectScreen } from "./src/hooks/useLayoutEffect";
 const Stack = createNativeStackNavigator();
 
 
@@ -25,6 +27,8 @@ const YourApp = () => {
         <Stack.Screen name="UseReducer" component={UseReducerScreen} />
         <Stack.Screen name="UseCallback" component={UseCallbackScreen} />
         <Stack.Screen name="UseMemo" component={UseMemoScreen} />
+        <Stack.Screen name="UseRef" component={UseRefScreen} />
+        <Stack.Screen name="UseLayoutEffect" component={UseLayoutEffectScreen} />
 
         {/* <Stack.Screen options={{headerShown: false}} name='Tabs' component={Tabs}/>
         <Stack.Screen name="Home" component={HomeScreen} /> */}
