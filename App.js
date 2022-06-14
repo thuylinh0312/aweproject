@@ -10,6 +10,8 @@ import { CoinListScreen } from "./src/screens/CoinListScreen";
 import { Tabs } from "./src/screens/CoinListScreen/tabs";
 import { Hooks } from "./src/hooks/hooks";
 import { UseReducerScreen } from "./src/hooks/useReducer"; 
+import { UseCallbackScreen } from "./src/hooks/useCallback";
+import { UseMemoScreen } from "./src/hooks/useMemo";
 const Stack = createNativeStackNavigator();
 
 
@@ -21,6 +23,9 @@ const YourApp = () => {
       <Stack.Navigator >
         <Stack.Screen name="Hooks" component={Hooks} />
         <Stack.Screen name="UseReducer" component={UseReducerScreen} />
+        <Stack.Screen name="UseCallback" component={UseCallbackScreen} />
+        <Stack.Screen name="UseMemo" component={UseMemoScreen} />
+
         {/* <Stack.Screen options={{headerShown: false}} name='Tabs' component={Tabs}/>
         <Stack.Screen name="Home" component={HomeScreen} /> */}
         {/* <Stack.Screen name='Coin List' component={CoinListScreen}/> */}
