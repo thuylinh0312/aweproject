@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import {View, FlatList, ActivityIndicator} from 'react-native'
+import {View, FlatList, ActivityIndicator, Pressable, Text} from 'react-native'
 import axios from 'axios'
 import { CoinListHeader } from '../../components/CoinListHeader'
 import { CoinListItem } from '../../components/CoinListItem'
+import {connect} from 'react-redux'
+import { addMoreData, setCoinList } from '../../actions/coinListActions'
 
 //Load more Load 20 items
 // onReachedEnd => goi API lấy các item tiếp theo
 
-export const CoinListScreen = () => {
-    const [list, setList] = useState([])
+const CoinList = ({navigation, setCoinList, list, addMoreData}) => {
+    
+
     // const getCoinList = (start) => {
     //     axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
     //             .then(({data}) => {
@@ -23,10 +26,11 @@ export const CoinListScreen = () => {
 
     const getCoinList = async (start) => { //lazy load
         try {
-            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=1000`)
-            setList(list.concat(data.data))
+            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=30`)
+            // setList(list.concat(data.data))
+            addMoreData(data.data)
         } catch (e) {
-            console.log('eeeeeee', error)
+            console.log('eeeeeee', e)
         }
         //console.log('sau try catch')
     }
@@ -47,6 +51,9 @@ export const CoinListScreen = () => {
 
     return (
         <View style={{flex: 1}}>
+            <Pressable onPress={() => navigation.navigate('CoinsSummary')}>
+                <Text>Summary</Text>
+            </Pressable>
             <CoinListHeader />
             {list.length === 0 ? <ActivityIndicator /> : (
                 <FlatList
@@ -74,3 +81,14 @@ export const CoinListScreen = () => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {list: state.coinList.list}
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setCoinList: (list) => dispatch(setCoinList(list)),
+        addMoreData: (list) => dispatch(addMoreData(list))
+    }
+}
+
+export const CoinListScreen = connect(mapStateToProps, mapDispatchToProps)(CoinList)
