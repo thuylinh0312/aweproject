@@ -1,5 +1,6 @@
 const initialState = {
     list: [],
+    loading: false,
     favourite: ['1', '2', '3']
 };
 const coinListReducer = (state = initialState, action) => {
@@ -14,6 +15,18 @@ const coinListReducer = (state = initialState, action) => {
                 ...state,
                 list: state.list.concat(action.list)
             };
+
+        case 'FETCH_COIN_LIST_REQUESTED':
+            return {
+                ...state,
+                loading: true
+            }
+
+        case 'FETCH_COIN_LIST_SUCCESS':
+            return {
+                list: action.list,
+                loading: false
+            }
         default:
             return state;
     }

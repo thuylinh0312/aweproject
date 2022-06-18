@@ -31,7 +31,7 @@ export const CoinListScreen = ({navigation}) => {
     // UI, logic, store (state)
 
     const getCoinList = async (start) => { //lazy load
-        fetchCoinList(dispatch)(start)
+        dispatch(fetchCoinList())
     }
 
     useEffect(() => {

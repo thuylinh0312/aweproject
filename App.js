@@ -20,13 +20,21 @@ import { UseContextScreen } from "./src/hooks/useContext/compA";
 import {UseImperativeHandle} from './src/hooks/useImperativeHandle'
 import CoinsSummary from "./src/screens/CoinsSummary";
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import rootReducer from './src/reducers'
+import createSagaMiddleware from 'redux-saga'
+import coinListSaga from "./src/sagas/coinListSaga";
  
 const Stack = createNativeStackNavigator();
 
+const sagaMiddleware = createSagaMiddleware()
 
-const store = createStore(rootReducer)
+
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
+
+sagaMiddleware.run(coinListSaga)
+//////////////
+
 const YourApp = () => {
   // return <Example1 />
   
