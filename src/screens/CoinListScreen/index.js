@@ -1,15 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {View, FlatList, ActivityIndicator, Pressable, Text} from 'react-native'
-import axios from 'axios'
 import { CoinListHeader } from '../../components/CoinListHeader'
 import { CoinListItem } from '../../components/CoinListItem'
-import {connect} from 'react-redux'
-import { addMoreData, setCoinList } from '../../actions/coinListActions'
+import {useSelector, useDispatch} from 'react-redux'
+import {fetchCoinList} from '../../actions/coinListActions'
 
 //Load more Load 20 items
 // onReachedEnd => goi API lấy các item tiếp theo
 
-const CoinList = ({navigation, setCoinList, list, addMoreData}) => {
+export const CoinListScreen = ({navigation}) => {
+    const dispatch = useDispatch()
+    
+    const list = useSelector(state => {
+        return state.coinList.list
+    })
     
 
     // const getCoinList = (start) => {
@@ -24,15 +28,10 @@ const CoinList = ({navigation, setCoinList, list, addMoreData}) => {
     // console.log('sau then catch')
     // }
 
+    // UI, logic, store (state)
+
     const getCoinList = async (start) => { //lazy load
-        try {
-            const {data} = await axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=30`)
-            // setList(list.concat(data.data))
-            addMoreData(data.data)
-        } catch (e) {
-            console.log('eeeeeee', e)
-        }
-        //console.log('sau try catch')
+        fetchCoinList(dispatch)(start)
     }
 
     useEffect(() => {
@@ -68,7 +67,7 @@ const CoinList = ({navigation, setCoinList, list, addMoreData}) => {
                 //     </View>
                 // )}
                 onEndReached={() => getCoinList(list.length + 1)}
-                data={list}
+                data={list ?? []} // fallback
                 renderItem={({item, index}) => {
                     return (
                         <CoinListItem item={item} />
@@ -81,14 +80,16 @@ const CoinList = ({navigation, setCoinList, list, addMoreData}) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {list: state.coinList.list}
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setCoinList: (list) => dispatch(setCoinList(list)),
-        addMoreData: (list) => dispatch(addMoreData(list))
-    }
-}
+// hooks
 
-export const CoinListScreen = connect(mapStateToProps, mapDispatchToProps)(CoinList)
+// const mapStateToProps = (state) => {
+//     return {list: state.coinList.list}
+// }
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         setCoinList: (list) => dispatch(setCoinList(list)),
+//         addMoreData: (list) => dispatch(addMoreData(list))
+//     }
+// }
+
+// connect
