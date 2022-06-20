@@ -16,20 +16,6 @@ export const CoinListScreen = ({navigation}) => {
     })
     
 
-    // const getCoinList = (start) => {
-    //     axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${start}&sort_dir=desc&limit=20`)
-    //             .then(({data}) => {
-    //                 setList(list.concat(data.data))
-    //                 console.log('thennnnnnnnnnn')
-    //             })
-    //             .catch((error) => {
-    //                 console.log('eeeeeee', error)
-    //             })
-    // console.log('sau then catch')
-    // }
-
-    // UI, logic, store (state)
-
     const getCoinList = async (start) => { //lazy load
         dispatch(fetchCoinList())
     }
@@ -46,7 +32,7 @@ export const CoinListScreen = ({navigation}) => {
         //         setList(data.data)
         //     })
         getCoinList(1)
-    }, []) // array dependencies
+    }, []) 
 
     return (
         <View style={{flex: 1}}>
@@ -56,16 +42,6 @@ export const CoinListScreen = ({navigation}) => {
             <CoinListHeader />
             {list.length === 0 ? <ActivityIndicator /> : (
                 <FlatList
-                // ListHeaderComponent={(
-                //     <View>
-                //         <Text>Day la header </Text>
-                //     </View>
-                // )}
-                // ListFooterComponent={(
-                //     <View>
-                //         <Text>Day la footer </Text>
-                //     </View>
-                // )}
                 onEndReached={() => getCoinList(list.length + 1)}
                 data={list ?? []} // fallback
                 renderItem={({item, index}) => {
@@ -80,7 +56,6 @@ export const CoinListScreen = ({navigation}) => {
     )
 }
 
-// hooks
 
 // const mapStateToProps = (state) => {
 //     return {list: state.coinList.list}
