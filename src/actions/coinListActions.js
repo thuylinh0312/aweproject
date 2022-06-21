@@ -9,7 +9,8 @@ export const addMoreData = () => ({
     type: 'ADD_MORE_DATA',
 })
 
-export const fetchCoinList = () => ({
+export const fetchCoinList = ({start}) => ({
+  start,
   type: 'FETCH_COIN_LIST_REQUESTED'
 })
 

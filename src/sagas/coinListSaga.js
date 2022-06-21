@@ -1,14 +1,24 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import axios from 'axios';
 
-function* fetchCoinList() {
+function* fetchCoinList(value) {
+    console.log("fetchCoinList saga", value)
     try { //await
-        const data = yield call(() => axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&sort_dir=desc&limit=30`));
+        const data = yield call(() => axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=${value.start}&sort_dir=desc&limit=30`));
         yield put({type: "FETCH_COIN_LIST_SUCCESS", list: data.data.data});
     } catch (e) {
 
     }
 }
+
+// function* fetchCoinList() {
+//     try { //await
+//         const data = yield call(() => axios.get(`https://web-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&sort_dir=desc&limit=30`));
+//         yield put({type: "FETCH_COIN_LIST_SUCCESS", list: data.data.data});
+//     } catch (e) {
+
+//     }
+// }
 
 
 // generator function

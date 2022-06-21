@@ -5,9 +5,6 @@ import { CoinListItem } from '../../components/CoinListItem'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchCoinList} from '../../actions/coinListActions'
 
-//Load more Load 20 items
-// onReachedEnd => goi API lấy các item tiếp theo
-
 export const CoinListScreen = ({navigation}) => {
     const dispatch = useDispatch()
     
@@ -17,7 +14,7 @@ export const CoinListScreen = ({navigation}) => {
     
 
     const getCoinList = async (start) => { //lazy load
-        dispatch(fetchCoinList())
+        dispatch(fetchCoinList({start}))
     }
 
     useEffect(() => {

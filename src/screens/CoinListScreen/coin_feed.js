@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View, TouchableOpacity, FlatList, ActivityIndicator} from "react-native"
+import { View, TouchableOpacity, FlatList, ActivityIndicator} from "react-native"
 import axios from 'axios'
 import { CoinListHeader } from '../../components/CoinListHeader'
 import { CoinListItem } from '../../components/CoinListItem'
@@ -56,15 +56,6 @@ export class CoinFeed extends React.Component {
                     />
                 )}
             </View>
-            // <View style={{flex: 1, alignItems: 'flex-start'}}>
-            //     <TouchableOpacity
-            //         onPress={() => this.setState({count: this.state.count + 1})}
-            //         style={{padding: 10, backgroundColor: 'red', borderRadius: 10, marginTop: 20}}
-            //     >
-            //         <Text>Count</Text>
-            //     </TouchableOpacity>
-            //     <Text>{this.state.count}</Text>
-            // </View>
         )
     }
 }
